@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    FILE * string;
+    char str1[50], str2[200], str3;
+    int l, i;
+
+    printf("Input the file location : ");
+    scanf("%s", &str1);
+
+    string = fopen (str1, "a");
+    if (string == NULL) {
+        printf("There is a problem creating or opening a File");
+        exit(1);
+    }
+
+    printf("Input how many lines to be appended : ");
+    scanf(" %d", &l);
+
+    for (i = 0; i < l; i++) {
+        scanf("%s", &str2);
+        fprintf(string, "%s\n", &str2);
+    }
+    fclose(string);
+
+    string = fopen (str1, "r");
+    str3 = fgetc(string);
+
+    printf("\n\nInside of the %s\n", str1);
+    while (str3 != EOF) {
+        printf("%c", str3);
+        str3 = fgetc(string);
+    }
+
+    fclose(string);
+    return 0;
+}
